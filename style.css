@@ -1,0 +1,289 @@
+/* default print reset */
+
+*,
+*::before,
+*::after {
+  /* background: #fff !important; */
+  /* color: #000 !important; */
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body {
+  margin: 0;
+}
+
+tr,
+img {
+  page-break-inside: avoid;
+}
+
+p,
+h2,
+h3 {
+  orphans: 3;
+  widows: 3;
+}
+
+h2,
+h3 {
+  page-break-after: avoid;
+}
+
+/* end reset */
+
+body {
+  font-family: "Sofia Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  --main-color: #000000;
+  --bg-color: transparent;
+  --line-height: 21px;
+  --line-width: 0.5mm;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: calc(297mm - 10mm);
+  height: calc(210mm - 10mm);
+  padding: 5mm;
+  /* border: 1px solid var(--main-color); */
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+/* Панель управления*/
+
+.set-week {
+  margin: 5mm; 
+}
+
+details {
+  background-color: lightgrey;
+  border: 1px solid black;
+  padding: 3px 10px;
+  width: 30rem;
+}
+
+/* Дни недели */
+
+.week-day {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.week-day_title {
+  border: var(--line-width) solid var(--main-color);
+  height: var(--line-height);
+  align-content: center;
+  text-align: center;
+}
+
+.week-day_lines {
+  width: 100%;
+  height: var(--line-height);
+  border-bottom: 0.5mm solid var(--main-color);
+}
+
+/*  */
+
+/* Главные задачи */
+
+.main-tasks {
+  /* grid-row: span 2 / span 2; */
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  border: var(--line-width) solid var(--main-color);
+}
+
+.main-tasks_title {
+  border-bottom: var(--line-width) solid var(--main-color);
+  height: var(--line-height);
+  align-content: center;
+  text-align: center;
+  /* margin-bottom: 5px; */
+}
+
+.main-tasks_item {
+  display: flex;
+  height: 30px;
+  align-items: flex-end;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.main-tasks_line {
+  flex-grow: 1;
+  border-bottom: var(--line-width) solid var(--main-color);
+}
+
+.main-tasks_item svg {
+  width: 24px;
+  height: 24px;
+}
+
+/*  */
+
+/* Небольшие задачи */
+
+.small-tasks {
+  /* grid-row: span 2 / span 2; */
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  border: var(--line-width) solid var(--main-color);
+}
+
+.small-tasks_title {
+  border-bottom: var(--line-width) solid var(--main-color);
+  height: var(--line-height);
+  align-content: center;
+  text-align: center;
+}
+
+.small-tasks_item {
+  display: flex;
+  height: 30px;
+  align-items: flex-end;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.small-tasks_line {
+  flex-grow: 1;
+  border-bottom: var(--line-width) solid var(--main-color);
+}
+
+.small-tasks_item svg {
+  width: 24px;
+  height: 24px;
+}
+
+/*  */
+
+/* Заметки */
+
+.notes {
+  grid-column: span 2 / span 2;
+  grid-column-start: 2;
+  grid-row-start: 3;
+  background-color: var(--bg-color);
+  border: var(--line-width) solid var(--main-color);
+}
+
+.notes_title {
+  border-bottom: var(--line-width) solid var(--main-color);
+  height: var(--line-height);
+  align-content: center;
+  text-align: center;
+}
+
+.notes_line {
+  width: calc(100% - var(--line-height) * 2);
+  height: var(--line-height);
+  margin-left: var(--line-height);
+  margin-right: var(--line-height);
+  background-image: url("dotted-line.svg");
+  background-repeat: repeat no-repeat;
+  background-position-x: left;
+  background-position-y: bottom;
+}
+
+/*  */
+
+/* Трекер привычек */
+
+.habits {
+  grid-column: span 2 / span 2;
+  grid-column-start: 4;
+  grid-row-start: 3;
+  background-color: var(--bg-color);
+}
+
+.habits_title {
+  border: var(--line-width) solid var(--main-color);
+  height: var(--line-height);
+  align-content: center;
+  text-align: center;
+}
+
+.habits_item {
+  display: flex;
+  height: 30px;
+  align-items: flex-end;
+}
+
+.habits_days-name {
+  text-align: right;
+}
+
+.habits_days-name span {
+  padding: 0 2px;
+  font-size: 15px;
+}
+
+.habits_line {
+  flex-grow: 1;
+  border-bottom: var(--line-width) solid var(--main-color);
+}
+
+.habits_item svg {
+  width: calc(25px * 7);
+  height: 24px;
+}
+
+/*  */
+
+/* Календарь */
+
+.calendar {
+  grid-column-start: 1;
+  grid-row-start: 3;
+  background-color: var(--bg-color);
+}
+
+.calendar .calendar_title {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  line-height: 30px;
+  height: 30px;
+}
+
+.calendar .calendar_table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 45px);
+}
+
+.calendar .calendar_table table {
+  border-collapse: collapse;
+}
+
+.calendar .calendar_table table td,
+.calendar .calendar_table table th {
+  padding: 5px;
+  text-align: center;
+}
+
+.calendar .calendar_table table .bold {
+  font-weight: bold;
+}
+
+.calendar .calendar_table table .border {
+  border: var(--line-width) solid var(--main-color);
+}

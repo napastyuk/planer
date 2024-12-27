@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Макет</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+    </style>
+</head>
+
+<body>
+    <div class="set-week no-print">
+        <label>Первый день недели&nbsp;<input type="date" /></label>
+        <button id="render-calendar">пересчитать</button>
+        <br>
+        <br>
+        <details>
+            <summary>Как распечатать?</summary>
+            <ol>
+                <li>Выберте в календарике выше первый день нужной недели. Это должен быть понедельник.</li>
+                <li>Нажмите кнопку пересчитать</li>
+                <li>Отправте страницу на печать. Через Файл->Печать или комбинацию Ctrl+P</li>
+                <li>В настройках печати выберете:
+                    <ol>
+                        <li>Ориентация->Горизонтально</li>
+                        <li>Поля->Минимальные</li>
+                        <li>Масштаб->По умолчанию или 100%</li>
+                        <li>Печать фона -> Да</li>
+                    </ol>
+                </li>
+            </ol>
+        </details>
+    </div>
+    <div class="layout">
+        <div class="week-day week-day_monday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_tuesday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_wednesday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_thursday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="main-tasks">
+            <div class="main-tasks_title">главные задачи</div>
+        </div>
+        <div class="week-day week-day_friday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_saturday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_sunday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_next-week">
+            <div class="week-day_title">следующая неделя</div>
+        </div>
+        <div class="small-tasks">
+            <div class="small-tasks_title">небольшие задачи</div>
+        </div>
+        <div class="calendar">
+            <div class="calendar_title"></div>
+            <div class="calendar_table">
+                <table>
+                    <thead class="calendar_days-of-week">
+                        <tr>
+                            <th>пн</th>
+                            <th>вт</th>
+                            <th>ср</th>
+                            <th>чт</th>
+                            <th>пт</th>
+                            <th>сб</th>
+                            <th>вс</th>
+                        </tr>
+                    </thead>
+                    <tbody class="calendar_days-of-month"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="notes">
+            <div class="notes_title">заметки</div>
+        </div>
+        <div class="habits">
+            <div class="habits_title">трекер привычек</div>
+            <div class="habits_days-name">
+                <span>пн</span>
+                <span>вт</span>
+                <span>ср</span>
+                <span>чт</span>
+                <span>пт</span>
+                <span>сб</span>
+                <span>вс</span>
+            </div>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <circle id="circle" cx="12" cy="12" r="10" stroke="var(--main-color)" fill="transparent" stroke-width="1" />
+    </svg>
+    <script src="layout.js"></script>
+    <script src="render.js"></script>
+</body>
+
+</html>
