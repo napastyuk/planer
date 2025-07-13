@@ -46,7 +46,7 @@
         <div class="week-day week-day_thursday">
             <div class="week-day_title"></div>
         </div>
-        <div class="main-tasks">
+        <div class="main-tasks tasks-block">
             <div class="main-tasks_title">главные задачи</div>
         </div>
         <div class="week-day week-day_friday">
@@ -61,7 +61,74 @@
         <div class="week-day week-day_next-week">
             <div class="week-day_title">следующая неделя</div>
         </div>
-        <div class="small-tasks">
+        <div class="small-tasks tasks-block">
+            <div class="small-tasks_title">небольшие задачи</div>
+        </div>
+        <div class="calendar">
+            <div class="calendar_title"></div>
+            <div class="calendar_table">
+                <table>
+                    <thead class="calendar_days-of-week">
+                        <tr>
+                            <th>пн</th>
+                            <th>вт</th>
+                            <th>ср</th>
+                            <th>чт</th>
+                            <th>пт</th>
+                            <th>сб</th>
+                            <th>вс</th>
+                        </tr>
+                    </thead>
+                    <tbody class="calendar_days-of-month"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="notes">
+            <div class="notes_title">заметки</div>
+        </div>
+        <div class="habits">
+            <div class="habits_title">трекер привычек</div>
+            <div class="habits_days-name">
+                <span>пн</span>
+                <span>вт</span>
+                <span>ср</span>
+                <span>чт</span>
+                <span>пт</span>
+                <span>сб</span>
+                <span>вс</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="layout">
+        <div class="week-day week-day_monday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_tuesday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_wednesday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_thursday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="main-tasks tasks-block">
+            <div class="main-tasks_title">главные задачи</div>
+        </div>
+        <div class="week-day week-day_friday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_saturday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_sunday">
+            <div class="week-day_title"></div>
+        </div>
+        <div class="week-day week-day_next-week">
+            <div class="week-day_title">следующая неделя</div>
+        </div>
+        <div class="small-tasks tasks-block">
             <div class="small-tasks_title">небольшие задачи</div>
         </div>
         <div class="calendar">
@@ -103,7 +170,6 @@
         <circle id="circle" cx="12" cy="12" r="10" stroke="var(--main-color)" fill="transparent" stroke-width="1" />
     </svg>
     <script src="layout.js"></script>
-    <script src="render.js"></script>
 </body>
 
 </html>

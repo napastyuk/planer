@@ -4,12 +4,11 @@
 
 function renderLayoutBlocks() {
     let weekDayLinesCount = 9;
-    let mainTasksLinesCount = 7;
-    let smallTasksLinesCount = 7;
+    let tasksLinesCount = 7;
     let notesLinesCount = 10;
     let trackerLinesCount = 7;
 
-    (function addLinesInWeekDayBlock() {
+    function addLinesInWeekDayBlock() {
         daysEl = document.querySelectorAll('.week-day');
         daysEl.forEach(dayEl => {
             let counter = weekDayLinesCount;
@@ -17,30 +16,26 @@ function renderLayoutBlocks() {
                 dayEl.insertAdjacentHTML('beforeend','<div class="week-day_lines"></div>');
             } while (--counter);
         });
-    })();
+    };
+    addLinesInWeekDayBlock();
 
-    (function addLinesInMainTasksBlock(){
+    function addLinesInBlock(container, count){
         let markup = '<div class="main-tasks_item"><div class="main-tasks_line"></div><svg><use href="#circle"></use></svg></div>';
         do {
-            document.querySelector('.main-tasks').insertAdjacentHTML('beforeend', markup); 
-        } while (--mainTasksLinesCount);
-    })();
+            container.insertAdjacentHTML('beforeend', markup); 
+        } while (--count);
+    };
+    document.querySelectorAll('.tasks-block').forEach(blockItem => addLinesInBlock(blockItem,tasksLinesCount));
 
-    (function addLinesInSmallTasksBlock(){
-        let markup = '<div class="small-tasks_item"><div class="small-tasks_line"></div><svg><use href="#circle"></use></svg></div>';
-        do {
-            document.querySelector('.small-tasks').insertAdjacentHTML('beforeend', markup); 
-        } while (--smallTasksLinesCount);
-    })();
-
-    (function addLinesInNotesBlock(){
+    function addLinesInNotesBlock(container, count){
         let markup = '<div class="notes_line"></div>';
         do {
-            document.querySelector('.notes').insertAdjacentHTML('beforeend', markup); 
-        } while (--notesLinesCount > 0);
-    })();
+            container.insertAdjacentHTML('beforeend', markup); 
+        } while (--count);
+    };
+    document.querySelectorAll('.notes').forEach(blockItem => addLinesInNotesBlock(blockItem,notesLinesCount));
 
-    (function addLinesInTrackerBlock() {
+    function addLinesInTrackerBlock(container, count) {
         let markup = "";
         let circleCount = 7;
         let circleX = 0;
@@ -55,17 +50,16 @@ function renderLayoutBlocks() {
         markup += '</div>';
 
         do {
-            document.querySelector('.habits').insertAdjacentHTML('beforeend', markup);
-        } while (--trackerLinesCount > 0);
-    })();    
+            container.insertAdjacentHTML('beforeend', markup);
+        } while (--count);
+    };
+    document.querySelectorAll('.habits').forEach(blockItem => addLinesInTrackerBlock(blockItem,trackerLinesCount));
 };
-
-
 
 /**
  * Генерация заголовков для дней недели с разметкой
  */
-function renderWeekTitles(weekDaysSelectors, startDay){
+function renderWeekTitles(container, weekDaysSelectors, startDay){
 
     let dayOfTheMonth = [];
     let weekDay = [];
@@ -85,11 +79,12 @@ function renderWeekTitles(weekDaysSelectors, startDay){
     }
 
     for (let i = 0; i < 7; i++) {
-        let domEl = document.querySelector(`${weekDaysSelectors[i]} .week-day_title`);
+        let domEl = container.querySelector(`${weekDaysSelectors[i]} .week-day_title`);
         let dayTitle = `${weekDay[i]}  ${dayOfTheMonth[i]}  ${monthTitles[i]}`;
         domEl.innerText = dayTitle;
     }
 };
+
 
 
 /**
@@ -201,6 +196,52 @@ function renderCalendar(body, targetDate){
     }   
 };
 
+document.addEventListener('DOMContentLoaded', function(){
+    const dateControl = document.querySelector('.set-week input[type="date"]');
+    const renderBtnEl = document.getElementById('render-calendar');
+    const weekDaysSelectors = [
+        '.week-day_monday',
+        '.week-day_tuesday',
+        '.week-day_wednesday',
+        '.week-day_thursday',
+        '.week-day_friday',
+        '.week-day_saturday',
+        '.week-day_sunday'
+    ];
+    const monthCalendarBodyElList = document.querySelectorAll('.calendar .calendar_days-of-month');
+    const monthCalendarTitleElList = document.querySelectorAll('.calendar .calendar_title');
+    const palnerElList = document.querySelectorAll('.layout');
+    
+    let firstDayOfWeek = getClosestMonday();
+    dateControl.value = firstDayOfWeek.toISOString().substring(0,10); //установим в инпут ближайший понедельник 
+    renderLayoutBlocks(); //добавим линии для дней внутри блоков
+
+    /*рендер динамических блоков*/
+    function render(targetDay) {
+        //первая неделя
+        monthCalendarTitleElList[0].innerText = targetDay.toLocaleString("ru", {year: 'numeric', month: 'long'});
+        renderWeekTitles(palnerElList[0],weekDaysSelectors,targetDay);
+        renderCalendar(monthCalendarBodyElList[0],targetDay)
+        
+        //вторая неделя
+        nextWeekDate = new Date(targetDay.setDate(targetDay.getDate() + 7));
+        renderWeekTitles(palnerElList[1],weekDaysSelectors,nextWeekDate);
+        renderCalendar(monthCalendarBodyElList[1],nextWeekDate);
+        monthCalendarTitleElList[1].innerText = nextWeekDate.toLocaleString("ru", {year: 'numeric', month: 'long'});
+    };
+
+    render(firstDayOfWeek);
+
+    /*Пересчет  после календаря после ввода новой даты*/
+    renderBtnEl.addEventListener('click', function() {
+        let dateFromControl = new Date(dateControl.value);
+        if (dateFromControl.getDay() !== 1) {
+            alert('Первый день недели должен быть понедельником!');
+            return;
+        };
+        render(dateFromControl);
+    });    
+})
 
 /**
  * Хепперы

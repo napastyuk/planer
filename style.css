@@ -51,6 +51,7 @@ body {
   width: calc(297mm - 10mm);
   height: calc(210mm - 10mm);
   padding: 5mm;
+  page-break-after: always;
   /* border: 1px solid var(--main-color); */
 }
 
